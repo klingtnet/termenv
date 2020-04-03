@@ -1,4 +1,4 @@
-module github.com/muesli/termenv
+module github.com/klingtnet/termenv
 
 go 1.13
 

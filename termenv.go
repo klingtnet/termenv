@@ -32,9 +32,12 @@ func ColorProfile() Profile {
 	return colorProfile()
 }
 
+// ForceColor overwrites the tty check, e.g. useful when generating shell prompts.
+var ForceColor bool = false
+
 // ForegroundColor returns the terminal's default foreground color
 func ForegroundColor() Color {
-	if !isatty.IsTerminal(os.Stdout.Fd()) {
+	if !ForceColor && !isatty.IsTerminal(os.Stdout.Fd()) {
 		return NoColor{}
 	}
 
@@ -43,7 +46,7 @@ func ForegroundColor() Color {
 
 // BackgroundColor returns the terminal's default background color
 func BackgroundColor() Color {
-	if !isatty.IsTerminal(os.Stdout.Fd()) {
+	if !ForceColor && !isatty.IsTerminal(os.Stdout.Fd()) {
 		return NoColor{}
 	}
 
